@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mapa Empire Bay v celé její kráse">
+    <link rel="stylesheet" type="text/css" href="moje webovka css.css"> 
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <title>Mafia II - Mapa</title>
+</head>
+<body>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f4f4f4;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+       
+       
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            padding-top: 40px;
+            background-color: rgba(0, 0, 0, 0.4); /* Poloprůhledná bílá */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+        }
+        h1 {
+            color: #ffffff;
+        }
+      
+       
+      
+     
+        .text-background {
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        #map {
+            width: 100%;
+            height: 600px;
+            margin-top: 20px;
+        }
+      
+    </style>
+
+<nav>
+    <input type="checkbox" id="check">
+    <label for="check" class="checkbtn">
+        <i class="fas fa-bars"></i>
+    </label>
+    <label class="logo">MAFIA II</label>
+    <ul>
+        <li><a href="index.html">DOMŮ</a></li>
+        <li><a href="formular.html">FORMULÁŘ</a></li>
+        
+        <li><a href="Mapa.html">MAPA</a></li>
+        <li><a href="ZBRANĚ.html">ZBRANĚ</a></li>
+        <li><a href="Auta.html">AUTA</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+    
+    <h1>Mapa</h1>
+    <p>Tato mapa zobrazuje herní prostředí. Kliknutím na mapu ji můžete zvětšit a prozkoumat detaily.</p>
+    <div id="map"></div>
+</div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+    var map = L.map('map', {
+        center: [0, 0],
+        zoom: 2,
+        minZoom: 1,
+        maxZoom: 4,
+        crs: L.CRS.Simple
+    });
+
+    var w = 1024, h = 768;
+    var url = 'https://videogamemods.com/mafia/wp-content/uploads/sites/13/cmdm/tmp/1430170521_discoverall.png';
+    var southWest = map.unproject([0, h], map.getMaxZoom()-1);
+    var northEast = map.unproject([w, 0], map.getMaxZoom()-1);
+    var bounds = new L.LatLngBounds(southWest, northEast);
+
+    L.imageOverlay(url, bounds).addTo(map);
+
+    map.setMaxBounds(bounds);
+    map.fitBounds(bounds);
+</script>
+
+</body>
+</html>
